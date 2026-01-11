@@ -38,12 +38,12 @@ jobs:
     container:
       image: fedora:latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Install dependencies in Fedora container
         run: |
           dnf install -y python3 python3-pip git
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
 
       - name: Install Python dependencies
         run: |

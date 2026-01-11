@@ -24,8 +24,15 @@ fi
 
 # Step 3: Install required Python packages
 echo "Installing required packages..."
+if [ ! -f "requirements.txt" ]; then
+    echo "Error: requirements.txt not found!"
+    exit 1
+fi
 python3 -m pip install --upgrade pip
-python3 -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt || {
+    echo "Failed to install requirements. Please check requirements.txt for errors."
+    exit 1
+}
 
 # Step 4: Install pyinstaller if not present
 if ! python3 -m pip show pyinstaller &> /dev/null; then
@@ -35,9 +42,7 @@ fi
 
 # Step 5: Build the executable
 echo "Building executable with PyInstaller..."
-# Use pyinstaller directly from PATH (installed by pip)
-export PATH="$HOME/.local/bin:$PATH"
-pyinstaller --onefile app.py
+python3 -m PyInstaller --onefile app.py
 
 # Step 6: Notify user
 if [ -f "dist/app" ]; then
