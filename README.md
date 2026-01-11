@@ -17,7 +17,30 @@ Run & supress ouptut
 python3 app &> /dev/null
 ```
 
-## Creating an Executable for Windows
+## Creating Bundled Executables
+
+GitHub Actions automatically builds executables for Ubuntu, Fedora, and Windows on every push to the main branch. You can download pre-built executables from the [Actions artifacts](../../actions).
+
+### Linux (Ubuntu/Fedora)
+
+To build a standalone Linux executable for the keylogger:
+
+1. Make sure you have Python 3.x installed on your Linux machine.
+2. Clone or copy all project files to your Linux machine.
+3. Run the build script:
+   ```bash
+   chmod +x build_linux.sh
+   ./build_linux.sh
+   ```
+   This script will:
+   - Install required Python packages
+   - Install PyInstaller if needed
+   - Build the executable using PyInstaller
+4. After completion, the executable will be located at `dist/app`.
+
+You can now run `./dist/app` to start the keylogger on Linux.
+
+### Windows
 
 To build a standalone Windows executable for the keylogger:
 
